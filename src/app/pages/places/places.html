@@ -1,0 +1,53 @@
+<section class="container-places">
+  <div class="container-places_general">
+    <!-- MAPA -->
+    <div class="container-map">
+      <app-maps (municipioSeleccionado)="onMunicipioSeleccionado()"></app-maps>
+    </div>
+
+    <!-- DESKTOP: Información del municipio -->
+    <div class="container-information" *ngIf="!isMobile">
+      <ng-container *ngIf="municipioService.selectedMunicipio() as municipioInf; else sinSeleccion">
+        <h2 class="container-information_title">{{ municipioInf.name }}</h2>
+        <p class="container-information_slogan">{{ municipioInf.slogan }}</p>
+
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab label="Eventos">
+          <app-slider [items]="eventos()" [favorites]="favoriteEvents()" [isEvent]="true"
+            (toggleFavoriteEvent)="toggleFavoriteEvent($event)" title="Eventos"></app-slider>
+          </mat-tab>
+          <mat-tab label="Lugares">
+            <app-slider [items]="lugares()" [favorites]="favoritePlaces()" [isEvent]="true"
+              (toggleFavoriteEvent)="toggleFavoriteEvent($event)" title="Lugares"></app-slider>
+            </mat-tab>
+        </mat-tab-group>
+      </ng-container>
+
+      <!-- Si no hay selección -->
+      <ng-template #sinSeleccion>
+        <p>Selecciona un municipio en el mapa para ver la información.</p>
+      </ng-template>
+    </div>
+
+    <!-- MOBILE: Diálogo con información -->
+    <dialog #infoDialog class="dialog-info-mobile" *ngIf="isMobile">
+      <div *ngIf="municipioService.selectedMunicipio() as municipioInf" class="container-information_mobile">
+        <button class="dialog-info-mobile_close" (click)="closeDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <h2 class="container-information_title">{{ municipioInf.name }}</h2>
+        <p class="container-information_slogan">{{ municipioInf.slogan }}</p>
+
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab label="Eventos">
+            <app-slider [items]="eventos()" title="Eventos"></app-slider>
+          </mat-tab>
+          <mat-tab label="Lugares">
+            <app-slider [items]="lugares()" title="Lugares"></app-slider>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </dialog>
+  </div>
+</section>

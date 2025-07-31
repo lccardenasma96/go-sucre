@@ -1,0 +1,12 @@
+ svg{
+    height: 90dvh;
+    width: auto;
+}
+svg path{
+    cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+    svg{
+        height: 80dvh;
+    }
+}

@@ -1,0 +1,270 @@
+.container_image_principal{
+  background-image: url("https://res.cloudinary.com/dqgxr4odj/image/upload/v1750554285/home_principal.jpg");
+  height: 100dvh; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-content: end;
+}
+.title-principal{
+    color: #fff;
+    font-size: 90px;
+    margin: 0 40px;
+    font-weight: 600;
+    height: 110px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.subtitle-principal{
+    color: #fff;
+    font-size: 46px;
+    margin: 0 40px 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.about-home{
+    display: flex;
+    background-color: white;
+    padding: 40px 0;
+}
+.about-home-container_image{
+    width: 50%;
+    margin: 5%;
+}
+.about-home_image{
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.about-home_title{    
+    font-size: 14px;
+    color:  #FFB700;    
+}
+.about-home-container_text{
+    width: 50%;
+    padding-right: 5%;
+}
+.about-home_text{
+    color: #777777;
+    margin-bottom: 30px;
+}
+.about-home_text span{
+    font-weight: 600;
+    color: #001A3D;
+    font-size: 37px;
+}
+.about-home_button{
+    display: flex;
+    width: fit-content;
+    color: #001A3D;    
+    text-decoration: none;
+    border: solid 1px #001A3D;
+    padding: 10px;
+    border-radius: 8px;
+}
+.gallery{
+    background-color: #f7f7f7;
+    padding: 30px 0;
+}
+.title_gallery{
+    color: #001A3D;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+.gallery-container{  
+    margin-top: 5px;  
+    column-count: 3;
+    gap: 20px;
+    padding: 25px 5%;
+}
+.gallery-container-card{
+    height: auto;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+.gallery-container-image{
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+.gallery-image{
+    
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.gallery-title_card{
+    color: #FFB700;
+    font-size: 19px;
+    font-weight: 600;
+}
+.gallery-text{
+    color: #777777;
+}
+.home-place{
+    background-image: url("https://res.cloudinary.com/dqgxr4odj/image/upload/v1750570906/manglar_zrrvrl.jpg");
+    height: 100dvh; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+.home-place-container_image{
+    width: 50%;
+    height: 100%;
+}
+.home-place_image{
+    height: 90%;
+    width: auto;
+    max-width: 100%;
+}
+.home-place-container_text{
+    width: 50%;
+    height: auto;
+    background-color:  #3d93a8a1;
+    padding: 5%;
+    color: white;
+}
+.home-place_title{
+    font-size: 50px;
+    font-weight: 600;
+    margin: 0;
+}
+.home-place_reg{
+    margin-bottom: 10px;
+}
+.home-place_text_reg{
+    margin-left: 20px;
+}
+.home-calendar{
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+}
+.home-calendar-container_text{
+    padding: 5%;
+    width: 50%;
+}
+.home-calendar-container_image{
+    padding: 5%;
+    width: 50%;
+    align-content: center;
+}
+.home-calendar_title{    
+    font-size: 14px;
+    color:  #FFB700; 
+}
+.home-calendar_subtitle{       
+    font-weight: 600;
+    color: #001A3D;
+    font-size: 37px;
+    margin: 0;
+}
+.home-calendar_text{
+    color: #777777;
+    margin-bottom: 30px;
+}
+.home-calendar_image{
+    max-width: 100%;   
+    max-height: 400px;
+    height: auto;
+    width: auto;
+    border-radius: 8px;
+}
+.slide-in-left {
+  position: relative;
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.slide-in-left.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide-in-right{
+    position: relative;
+  transform: translateX(50px);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+.slide-in-right.visible{
+    transform: translateX(0);
+  opacity: 1;
+}
+.fade-up{
+    position: relative;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+.fade-up.visible{
+    transform: translateY(0);
+  opacity: 1;
+}
+
+
+@media only screen and (max-width: 768px){
+    .about-home{
+        flex-direction: column;
+    }
+    .about-home-container_image{
+        width: -webkit-fill-available;
+    }
+    .about-home-container_text{
+        width: -webkit-fill-available;
+        padding: 5%;
+    }
+    .title_gallery{
+        width: -webkit-fill-available;
+        padding: 5%;
+    }
+    .gallery-container{
+        column-count: 2;
+    }
+    .home-place{
+        flex-direction: column;
+    }
+    .home-place-container_image{
+        display: none;
+    }
+    .home-place-container_text{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 100%;
+        overflow-y: scroll;
+    }
+    .home-calendar{
+        flex-direction: column;
+    }
+    .home-calendar-container_text{
+        width: -webkit-fill-available;
+    }
+    
+    .home-calendar-container_image{
+        width: -webkit-fill-available;
+    }
+
+}
+@media only screen and (max-width: 600px){
+        .gallery-container{
+            column-count: 1;
+            justify-items: center;
+        }
+        .gallery-container-card{
+            max-width: 300px;
+        }
+        .home-place-container_text{
+            width: -webkit-fill-available;            
+        }
+}

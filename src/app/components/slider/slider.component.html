@@ -1,0 +1,56 @@
+<div class="place-slider">
+  <ng-container *ngIf="items.length > 0; else sinContenido">
+    <div class="embla-wrapper">
+      <div class="embla" #viewport>
+        <div class="embla__container">
+          <div
+            class="embla__slide"
+            *ngFor="let item of items; trackBy: trackByItem"
+          >
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <!-- FRONT -->
+                <div class="flip-card-front">
+                  <div class="image-container">
+                    <img class="card-image" [src]="item.image" alt="{{ item.title }}" />
+                  </div>
+                  <div class="card-front-content">
+                    <h3>{{ item.name }}</h3>
+                    <p class="date">{{ item.start_date }} - {{ item.end_date}}</p>
+                    <div class="stars">★ ★ ★ ★ ☆</div>
+                  </div>
+                </div>
+                <!-- BACK -->
+                <div class="flip-card-back">
+                  <p>{{ item.description }}</p>
+                  <div class="floating-buttons">
+                    <button class="card-button_favorite" (click)="onToggleFavorite(item.id)" type="button">
+                      <!-- Debug: {{ item.id }} -->
+                      <mat-icon class="card-button_icon">
+                        {{ favoriteMap()[item.id] ? 'favorite' : 'favorite_border' }}
+                      </mat-icon>
+                    </button>
+                    <button>
+                      <mat-icon class="card-button_icon">location_on</mat-icon>
+                    </button>
+                    <button class="card-button_event">
+                      <mat-icon class="card-button_icon">event</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTONES DE NAVEGACIÓN -->
+      <button class="embla__button embla__button--prev" (click)="scrollPrev()">◀</button>
+      <button class="embla__button embla__button--next" (click)="scrollNext()">▶</button>
+    </div>
+  </ng-container>
+
+  <ng-template #sinContenido>
+    <p class="carousel-text_empty">No hay {{ title.toLowerCase() }} disponibles.</p>
+  </ng-template>
+</div>

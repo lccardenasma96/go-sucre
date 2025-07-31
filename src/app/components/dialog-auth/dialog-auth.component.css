@@ -1,0 +1,147 @@
+.dialog-section{
+  position: relative;
+  height: 360px;
+}
+.dialog-section_button{
+  padding: 0;
+}
+.auth_container_forms{
+  display: flex;
+}
+.auth_input_tabs {
+  position: absolute;
+  z-index: -1;
+}
+.auth_form_content {
+  display: none;
+}
+.auth_input_tabs:checked + .auth_tab-content .auth_form_content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 206px;
+  width: 100%;
+  max-width: 260px;
+  margin-top: 45px;
+}
+.auth_title_register{
+    position: absolute;
+    top: 0;
+    left: 24px;
+    padding: 6px;
+    background-color: #f1f1f1;
+    color: #777;
+    border-radius: 50px 0 0 50px;
+    width: calc(50% - 24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    cursor: pointer;
+}
+.auth_title_login{
+    position: absolute;
+    top: 0;
+    right: 24px;
+    padding: 6px;
+    background-color: #f1f1f1;
+    color: #777;
+    border-radius: 0 50px 50px 0;
+    width: calc(50% - 24px);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    cursor: pointer;
+}
+.auth_input_tabs:checked + .auth_tab-content .auth_title_form {
+  background-color: transparent;
+  color: white;
+  transition: right 2s;  
+  z-index: 1;
+}
+.auth_container_input_form{
+  position: relative;
+}
+.auth_input_form{
+    height: 35px;
+    width: 240px;
+    border: solid 1px #777;
+    color: #777;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.auth_label_form {
+  position: absolute;
+  top: 1rem;
+  left: 0.6rem;
+  color: #3d93a8;
+  font-size: 10px;
+  background-color: white;
+  padding: 0 0.25rem;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.auth_input_form:focus{
+  border: solid 2px #3d93a8;
+}
+.auth_input_form:focus-visible{
+  outline: none;
+  box-shadow: none;
+}
+.auth_input_form:focus::placeholder{
+visibility: hidden;
+}
+.auth_input_form:focus + .auth_label_form,
+.auth_input_form:not(:placeholder-shown) + .auth_label_form {
+  top: -0.6rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  z-index: 1;
+}
+.auth_container_login_password{
+  flex: 1;
+}
+.auth_button_form{
+  width: calc(100% - 48px);
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #3d93a8;
+  font-size: 16px;
+  bottom: 20px;
+  position: absolute;
+}
+/*Posible animación*/
+
+ /*Error Form*/
+ .success_message {
+  color: #FFB700;
+  margin-top: 10px;
+  font-weight: 500;
+}
+ .error-msg {
+  color: red;
+  font-size: 13px;
+  margin: 8px 0;
+  text-align: left;
+}
+.checked_bg{
+  position: absolute;
+  background-color: #3d93a8;
+  width: calc(59% - 48px);
+  top: 0;
+  height: 36px;
+  border-radius: 50px;
+  z-index: 0;
+  transition: all .4s ease-in-out;
+}
+#tabRegister:checked ~ .checked_bg{
+  right: calc(50% - 4px);
+} 
+#tabLogin:checked ~ .checked_bg{
+  right: 24px;
+} 

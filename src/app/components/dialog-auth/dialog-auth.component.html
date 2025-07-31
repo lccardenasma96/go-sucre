@@ -1,0 +1,49 @@
+<mat-dialog-actions align="end" class="dialog-section_button">
+  <button mat-icon-button mat-dialog-close aria-label="Cerrar">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-content class="dialog-section">
+  <div class="auth_container_forms">
+    
+    <input type="radio" class="auth_input_tabs" name="auth_tabs" id="tabRegister" checked>
+    <div class="auth_tab-content">
+      <label class="auth_title_form auth_title_register" for="tabRegister">Regístrate</label>
+      <form class="auth_form_content" (ngSubmit)="register()">
+        <div class="auth_container_input_form">
+          <input [(ngModel)]="name" name="name" class="auth_input_form" id="auth_register_name" type="text" placeholder="Nombre">
+          <label for="auth_register_name" class="auth_label_form">Nombre</label>          
+        </div>
+        <div class="auth_container_input_form">
+          <input [(ngModel)]="emailReg" name="emailReg" class="auth_input_form" id="auth_register_email" type="email" placeholder="Correo Electrónico">
+          <label for="auth_register_email" class="auth_label_form">Correo Electrónico</label>          
+        </div>
+        <div class="auth_container_input_form">          
+          <input [(ngModel)]="passwordReg" name="passwordReg" class="auth_input_form" id="auth_register_password" type="password" placeholder="Contraseña">
+          <label for="auth_register_password" class="auth_label_form">Contraseña</label>
+        </div>
+        <p *ngIf="registerSuccess" class="success_message">{{ registerSuccess }}</p>
+        <p *ngIf="registerError" class="error-msg">{{ registerError }}</p>
+        <button type="submit" class="auth_button_form" >Registrar</button>
+      </form>
+    </div>
+     
+    <input type="radio" class="auth_input_tabs" name="auth_tabs" id="tabLogin">
+    <div class="auth_tab-content">
+      <label class="auth_title_form auth_title_login" for="tabLogin">Ingresa</label>
+      <form class="auth_form_content" (ngSubmit)="login()">
+        <div class="auth_container_input_form">
+          <input [(ngModel)]="email" name="email" class="auth_input_form" id="auth_login_email" type="email" placeholder="Correo Electrónico">
+          <label for="auth_login_email" class="auth_label_form">Correo Electrónico</label>          
+        </div>
+        <div class="auth_container_input_form auth_container_login_password">
+          <input [(ngModel)]="password" name="password" class="auth_input_form" id="auth_login_password" type="password" placeholder="Contraseña">
+          <label for="auth_login_password" class="auth_label_form">Contraseña</label>          
+        </div>
+        <p *ngIf="loginError" class="error-msg">{{ loginError }}</p>
+        <button type="submit" class="auth_button_form">Ingresar</button>
+      </form>
+    </div>
+    <span class="checked_bg"></span>
+  </div>
+</mat-dialog-content>

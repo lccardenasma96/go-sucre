@@ -1,0 +1,85 @@
+<section class="container_image_principal">
+    <p class="title-principal">Sucre</p>
+    <p class="subtitle-principal">Un lugar por descubrir</p>
+</section>
+<section class="about-home">
+    <div class="about-home-container_image slide-in-left" [appScrollAnim]="'visible'">
+        <img class="about-home_image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750555376/home_about_v9zx61.jpg" alt="">
+    </div>
+    <div class="about-home-container_text slide-in-right" [appScrollAnim]="'visible'">
+        <p class="about-home_title ">Sobre Sucre</p>
+        <p class="about-home_text"><span>Naturaleza, cultura y sabor. ¡Ven y enamórate del Caribe auténtico!</span><br> Ubicado en el corazón de la región Caribe, el departamento de Sucre te espera con playas cristalinas, cultura viva y una calidez que enamora. Explora las arenas blancas de Tolú y Coveñas, sumérgete en el mar tranquilo del Golfo de Morrosquillo, o navega por los manglares y ciénagas que rodean este paraíso natural. Pero Sucre es más que sol y playa: vive su tradición sabanera a través de la música del porro y sus coloridas fiestas populares. Disfruta de la gastronomía costeña, con sabores únicos como el mote de queso y el pescado fresco</p>
+        <a class="about-home_button" routerLink="/places">Conoce más! →</a>
+    </div>    
+</section>
+<section class="gallery">
+    <p class="title_gallery fade-up" [appScrollAnim]="'visible'">Ven y conoce éste hermoso lugar</p>
+<section class="gallery-container">
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561803/golfo_pyg3s8.jpg" alt="">
+         </div>
+         <p class="gallery-title_card" >Playas del Golfo de Morrosquillo</p>
+        <p class="gallery-text">Aguas cálidas y arenas suaves te esperan en destinos como Tolú, Coveñas y Berrugas. Perfecto para relajarte, nadar o hacer deportes náuticos.</p>
+   </div>    
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561799/cultura_eefhtn.jpg" alt="">
+         </div>
+         <p class="gallery-title_card" >Cultura Zenú</p>
+        <p class="gallery-text">Descubre las raíces indígenas del Caribe colombiano a través de la artesanía en caña flecha y la historia viva de los Zenúes en San Antonio de Palmito y San Andrés de Sotavento.</p>
+   </div>    
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561794/fiestas_hwboru.jpg" alt="">
+       </div>
+         <p class="gallery-title_card" >Fiestas y Tradiciones</p>
+        <p class="gallery-text">Sucre vibra con celebraciones como las Fiestas del 20 de Enero en Sincelejo. Música, fandango, cabalgatas y cultura popular llenan las calles de alegría.</p>
+    </div>    
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561789/ecoturismo_sp1e7q.jpg" alt="">
+      </div>
+        <p class="gallery-title_card" >Ecoturismo y naturaleza</p>
+        <p class="gallery-text">Explora ciénagas, manglares y rutas ecológicas en La Mojana y los alrededores de San Marcos o Toluviejo. Un destino para los amantes del turismo sostenible.</p>
+    </div>    
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561785/gastronomia_t95rod.jpg" alt="">
+     </div>
+        <p class="gallery-title_card" >Gastronomía Costeña</p>
+        <p class="gallery-text">Deléitate con arroz de coco, pescado frito, enyucados, entre otros. La cocina sucreña es un festín de sabores del mar y la tierra.</p>
+    </div>    
+    <div class="gallery-container-card fade-up" [appScrollAnim]="'visible'">
+        <div class="gallery-container-image">
+        <img class="gallery-image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750561782/religioso_bsr8yn.jpg" alt="">
+     </div>
+         <p class="gallery-title_card" >Turismo religioso y patrimonial</p>
+        <p class="gallery-text">Iglesias coloniales, procesiones y arquitectura histórica en municipios como Corozal, Sampués y Ovejas ofrecen una conexión con la fe y la historia local.</p>
+     </div>    
+</section>
+</section>
+<section class="home-place">
+    <div class="home-place-container_image slide-in-left" [appScrollAnim]="'visible'">
+        <img class="home-place_image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750799265/regiones_zd3lmc.svg" alt="">
+    </div>
+    <div class="home-place-container_text slide-in-right" [appScrollAnim]="'visible'">
+        <p class="home-place_title" >Explora las regiones que hacen único a Sucre</p>
+        <p class="home-place_subtitle">Descubre la riqueza de Sucre a través de sus cinco regiones, cada una con experiencias únicas:</p>
+        <details class="home-place_reg" #detail *ngFor="let region of regiones" (toggle)="onToggleRegions(detail)">
+            <summary class="home-place_title_reg">{{region.name}} </summary>
+            <p class="home-place_text_reg">{{region.description}} </p>
+           </details>
+    </div>
+</section>
+<section class="home-calendar">
+    <div class="home-calendar-container_text slide-in-left" [appScrollAnim]="'visible'">
+        <p class="home-calendar_title">Planea tu viaje</p>
+        <p class="home-calendar_subtitle">Sucre celebra todo el año</p>
+        <p class="home-calendar_text">En Sucre, la cultura no se observa: se vive, se canta y se celebra. A lo largo del año, los municipios del departamento se transforman con fiestas que mezclan tradición, música, gastronomía y alegría colectiva. Desde festivales de tambores y porros hasta celebraciones religiosas profundamente arraigadas, cada evento es una puerta abierta al corazón de la región. Explora nuestras ferias, fiestas patronales, carnavales y encuentros culturales, y elige cuándo quieres venir. Ya sea en los Montes de María, las riberas de La Mojana o las playas del Golfo, siempre hay algo que celebrar. Planea tu experiencia y acompaña a Sucre en sus momentos más vibrantes.</p>
+        <a class="about-home_button" routerLink="/places">Descubre los eventos que te esperan →</a>
+    </div>
+    <div class="home-calendar-container_image slide-in-right" [appScrollAnim]="'visible'">
+        <img class="home-calendar_image" src="https://res.cloudinary.com/dqgxr4odj/image/upload/v1750805588/home_calendar_kzql1l.jpg" alt="">
+    </div>
+</section>
