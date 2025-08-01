@@ -23,15 +23,6 @@ GoSucre es una aplicación web desarrollada en Angular que sirve como plataforma
 - **Carousel de Imágenes**: Galería deslizable con Embla Carousel
 - **Pestañas Organizadas**: Separación entre lugares y eventos
 
-### 👤 Perfil de Usuario
-- **Autenticación**: Sistema de login/registro con JWT
-- **Gestión de Favoritos**: Vista consolidada de lugares y eventos favoritos
-- **Protección de Rutas**: Guard de autenticación para acceso seguro
-
-### ℹ️ Página Acerca de
-- **Información del Proyecto**: Descripción detallada de la plataforma
-- **Tecnologías Utilizadas**: Stack tecnológico empleado
-
 ## 🛠️ Tecnologías Utilizadas
 
 ### Frontend
@@ -42,13 +33,11 @@ GoSucre es una aplicación web desarrollada en Angular que sirve como plataforma
 - **RxJS**: Programación reactiva
 
 ### Librerías Externas
-- **Leaflet**: Mapas interactivos
 - **Embla Carousel**: Carrusel de imágenes
 - **JWT Decode**: Manejo de tokens JWT
 
 ### Herramientas de Desarrollo
 - **Angular CLI**: Herramientas de línea de comandos
-- **Karma & Jasmine**: Testing framework
 - **Sass**: Compilador de estilos
 
 ## 📦 Instalación y Configuración
@@ -173,34 +162,12 @@ src/
 - Contraste adecuado para legibilidad
 - Consistencia visual en toda la aplicación
 
-## 🧪 Testing
-
-### Framework de Testing
-- **Karma**: Test runner
-- **Jasmine**: Framework de testing
-- **Coverage**: Reportes de cobertura de código
-
-### Ejecutar Tests
-```bash
-# Tests unitarios
-ng test
-
-# Tests con coverage
-ng test --code-coverage
-```
-
 ## 🚀 Despliegue
 
 ### Build de Producción
 ```bash
 ng build --configuration production
 ```
-
-### Optimizaciones
-- **Tree Shaking**: Eliminación de código no utilizado
-- **Minificación**: Compresión de archivos
-- **Lazy Loading**: Carga diferida de módulos
-- **Service Workers**: Caché para mejor rendimiento
 
 ## 📱 Compatibilidad
 
@@ -212,7 +179,6 @@ ng build --configuration production
 
 ### Dispositivos
 - **Desktop**: 1024px y superior
-- **Tablet**: 768px - 1023px
 - **Mobile**: 320px - 767px
 
 ## 🔧 Scripts Disponibles
@@ -226,22 +192,3 @@ ng build --configuration production
   "test": "ng test"
 }
 ```
-
-## 🤝 Contribución
-
-### Guías de Contribución
-1. Fork del repositorio
-2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit de cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crear Pull Request
-
-### Estándares de Código
-- **TypeScript**: Configuración estricta
-- **ESLint**: Linting de código
-- **Prettier**: Formateo automático
-- **Conventional Commits**: Estándar de commits
-
-
-
-**GoSucre** - Descubre la magia del departamento de Sucre, Colombia 🇨🇴
