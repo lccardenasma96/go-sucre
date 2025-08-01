@@ -1,0 +1,83 @@
+.container-about{
+    display: flex;
+    background-color: #3d93a8;
+    padding-top: 100px;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+.about-content {
+    max-width: 900px;
+    width: 80%;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .about-title {
+    
+    margin-bottom: 1.5rem;
+    color: #001A3D;
+    text-align: center;
+  }
+  
+  .about-description {
+    line-height: 1.7;
+    color: #777;
+    text-align: justify;
+    margin-bottom: 2rem;
+  }
+  
+  .about-section {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+
+    color: #001A3D;
+    margin-bottom: 1rem;
+  }
+  
+  .about-list {
+    list-style: disc inside;
+    color: #777;
+    line-height: 1.6;
+    padding-left: 1rem;
+  }
+  
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .tech-stack span {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  @media screen and (max-width: 768px) {
+    .container-about{
+        padding-top: 20px;
+    }
+    .about-content {
+      padding: 1.5rem;
+    }
+  
+    .about-title {
+      font-size: 1.6rem;
+    }
+  
+    .about-description,
+    .section-title {
+      font-size: 1rem;
+    }
+  
+    .tech-stack {
+      justify-content: center;
+    }
+  }
+  

@@ -7,6 +7,8 @@
     top: 0;
     z-index: 9999999;    
     transition: all .9s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 .scrolled{
     height: 70px;
