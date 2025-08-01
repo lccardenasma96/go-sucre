@@ -28,7 +28,8 @@
                     <button class="card-button_favorite" (click)="onToggleFavorite(item.id)" type="button">
                       <!-- Debug: {{ item.id }} -->
                       <mat-icon class="card-button_icon">
-                        {{ favoriteMap()[item.id] ? 'favorite' : 'favorite_border' }}
+                        {{ isEventFavorite(item.id) ? 'favorite' : 'favorite_border' }}
+                        <!-- Debug: {{ isEventFavorite(item.id) }} -->
                       </mat-icon>
                     </button>
                     <button>

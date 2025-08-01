@@ -45,10 +45,9 @@ export class Places implements OnInit {
   municipioService = inject(MunicipioService);
   apiService = inject(ApiService);
   favoriteEventsService = inject(FavoriteEventsService);
-
   favoritePlacesService = inject(FavoritePlacesService);
-
   private cdr = inject(ChangeDetectorRef);
+
   // Municipio seleccionado
   selectedMunicipio = this.municipioService.selectedMunicipioSignal;
 
@@ -65,6 +64,7 @@ export class Places implements OnInit {
     console.log('Token exists:', !!localStorage.getItem('token'));
     console.log('toggleFavoriteEvent method exists:', typeof this.toggleFavoriteEvent);
     console.log('toggleFavoritePlace method exists:', typeof this.toggleFavoritePlace);
+
     this.loadPlaces();
     this.loadFavorites();
 
@@ -79,14 +79,34 @@ export class Places implements OnInit {
         this.eventos.set([]);
       }
     });
+
+    // Observar cambios en los favoritos de eventos
+    effect(() => {
+      const favoriteMap = this.favoriteEventsService.favoriteMapComputed();
+      const favoriteIds = Object.keys(favoriteMap)
+        .filter(key => favoriteMap[parseInt(key)])
+        .map(key => parseInt(key));
+      this.favoriteEvents.set(favoriteIds);
+    });
+
+    // Observar cambios en los favoritos de lugares
+    effect(() => {
+      const favoriteMap = this.favoritePlacesService.favoriteMapComputed();
+      const favoriteIds = Object.keys(favoriteMap)
+        .filter(key => favoriteMap[parseInt(key)])
+        .map(key => parseInt(key));
+      this.favoritePlaces.set(favoriteIds);
+    });
   }
 
   ngOnInit(): void {
     this.isMobile = window.innerWidth <= 768;
   }
+
   cambiarTab(event: MatTabChangeEvent) {
     this.tabService.currentTab.set(event.index);
   }
+
   onMunicipioSeleccionado(): void {
     if (this.isMobile && this.infoDialog?.nativeElement) {
       setTimeout(() => {
@@ -119,8 +139,10 @@ export class Places implements OnInit {
       return;
     }
 
-    this.apiService.getFavoritePlaces().subscribe({
+    // Cargar favoritos de lugares
+    this.favoritePlacesService.getAllFavorites().subscribe({
       next: (data) => {
+        console.log('Favoritos de lugares cargados en Places:', data);
         const ids = data.map(p => p.id);
         this.favoritePlaces.set(ids);
       },
@@ -129,8 +151,10 @@ export class Places implements OnInit {
       }
     });
 
-    this.favoriteEventsService.getFavoriteEvents().subscribe({
+    // Cargar favoritos de eventos
+    this.favoriteEventsService.getAllFavorites().subscribe({
       next: (data) => {
+        console.log('Favoritos de eventos cargados en Places:', data);
         const ids = data.map(e => e.id);
         this.favoriteEvents.set(ids);
       },
@@ -149,26 +173,56 @@ export class Places implements OnInit {
       return;
     }
     console.log('Toggle favorito para el lugar:', placeId);
+
     if (this.favoritePlacesService.isFavoriteSignal(placeId)) {
-      this.favoritePlacesService.removeFavoritePlace(placeId).subscribe();
+      this.favoritePlacesService.removeFavoritePlace(placeId).subscribe({
+        next: () => {
+          console.log('Lugar removido de favoritos:', placeId);
+        },
+        error: (error) => {
+          console.error('Error removiendo lugar de favoritos:', error);
+        }
+      });
     } else {
-      this.favoritePlacesService.addFavoritePlace(placeId).subscribe();
+      this.favoritePlacesService.addFavoritePlace(placeId).subscribe({
+        next: () => {
+          console.log('Lugar agregado a favoritos:', placeId);
+        },
+        error: (error) => {
+          console.error('Error agregando lugar a favoritos:', error);
+        }
+      });
     }
-    // Lógica para agregar/quitar de favoritos
   }
 
   // ---------- FAVORITOS: EVENTS ----------
 
   toggleFavoriteEvent(eventId: number) {
+    console.log('Places: toggleFavoriteEvent called with eventId:', eventId);
     if (!this.apiService.isLoggedIn()) {
       console.log('User not logged in, cannot toggle favorite');
       return;
     }
+
     if (this.favoriteEventsService.isFavoriteSignal(eventId)) {
-      this.favoriteEventsService.removeFavoriteEvent(eventId).subscribe();
+      this.favoriteEventsService.removeFavoriteEvent(eventId).subscribe({
+        next: () => {
+          console.log('Evento removido de favoritos:', eventId);
+        },
+        error: (error) => {
+          console.error('Error removiendo evento de favoritos:', error);
+        }
+      });
     } else {
-      this.favoriteEventsService.addFavoriteEvent(eventId).subscribe();
+      this.favoriteEventsService.addFavoriteEvent(eventId).subscribe({
+        next: () => {
+          console.log('Evento agregado a favoritos:', eventId);
+        },
+        error: (error) => {
+          console.error('Error agregando evento a favoritos:', error);
+        }
+      });
     }
-  } 
-  
+  }
+
 }
