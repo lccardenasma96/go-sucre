@@ -11,20 +11,24 @@ import {
   SimpleChanges,
   ChangeDetectorRef,
   inject,
-  signal
+  signal,
+  effect,
+  computed
 } from '@angular/core';
 
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
 import EmblaCarousel from 'embla-carousel';
 import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import { FavoriteEventsService } from '../../services/favorite-events.service';
+import { TabService } from '../../services/tab.service';
+import { FavoritePlacesService } from '../../services/favorite-places.service';
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [NgIf, NgFor, MatIcon],
+  imports: [NgIf, NgFor, MatIcon, CommonModule],
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
@@ -41,11 +45,22 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('viewport', { static: false }) viewportRef!: ElementRef;
   embla: EmblaCarouselType | null = null;
   favoriteEventsService = inject(FavoriteEventsService)
+  favoritePlacesService = inject(FavoritePlacesService)
   constructor(private cdr: ChangeDetectorRef) {
     console.log('Slider: constructor called, toggleFavoriteEvent output exists:', !!this.toggleFavoriteEvent);
-  }
-  readonly favoriteMap = this.favoriteEventsService.favoriteMapComputed;
 
+    effect(() => {
+      console.log('Tab cambió a:', this.tabService.currentTab());
+    });
+  }
+
+
+  readonly favoriteMap = computed(() =>
+    this.tabService.currentTab() === 0
+      ? this.favoriteEventsService.favoriteMapComputed()
+      : this.favoritePlacesService.favoriteMapComputed()
+  );
+  
   ngOnInit(): void {
     console.log('Slider: ngOnInit called with items:', this.items?.length);
     if (!this.items) {
@@ -54,16 +69,19 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
     setTimeout(() => {
       this.items.forEach(item => {
         this.favoriteEventsService.fetchFavoriteStatus(item.id);
+        this.favoritePlacesService.fetchFavoriteStatus(item.id);
       });
     });
   }
   favoriteEvents = signal<number[]>([]);
   current = this.favoriteEvents();
+  private tabService = inject(TabService);
+
 
   isFavorite(id: number): boolean {
-    return this.favoriteEventsService.isFavoriteSignal(id);
+    return !!this.favoriteMap()[id];
   }
- 
+
   ngAfterViewInit(): void {
     this.initEmbla();
   }
@@ -72,10 +90,9 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
     if (changes['items'] && this.items.length > 0) {
       this.reinitEmbla();
     }
+
   }
 
-  
-  
   private initEmbla(): void {
     if (this.viewportRef?.nativeElement) {
       const options: EmblaOptionsType = {
@@ -112,26 +129,14 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
   trackByItem(index: number, item: any): string {
     return item.id || `${item.title}-${index}`;
   }
-  
-    onToggleFavorite(eventId: number): void {
-     
-      console.log('Slider: onToggleFavorite called with eventId:', eventId, 'isEvent:', this.isEvent);
-      console.log('Slider: toggleFavoriteEvent output exists:', !!this.toggleFavoriteEvent);
-      
-      // Siempre emitir el evento para que el padre pueda manejarlo
-      this.toggleFavoriteEvent.emit(eventId);
-      console.log('Slider: Event emitted successfully');
-    }
 
-
-    onToggleFavoritePlace(eventId: number): void {
-      console.log('Slider: onToggleFavorite called with eventId:', eventId, 'isEvent:', this.isEvent);
-      console.log('Slider: toggleFavoriteEvent output exists:', !!this.toggleFavoritePlace);
-      
-      // Siempre emitir el evento para que el padre pueda manejarlo
-      this.toggleFavoritePlace.emit(eventId);
-      console.log('Slider: Event emitted successfully');
+  onToggleFavorite(itemId: number): void {
+    if (this.tabService.currentTab() === 0) {
+      this.toggleFavoriteEvent.emit(itemId);
+    } else {
+      this.toggleFavoritePlace.emit(itemId);
     }
-    
+  }
+
 }
 

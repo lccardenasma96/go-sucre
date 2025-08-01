@@ -12,6 +12,7 @@ import {
 import { NgIf } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIcon } from '@angular/material/icon';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { MunicipioService } from '../../services/municipio';
 import { ApiService } from '../../services/api.service';
@@ -20,6 +21,7 @@ import { Maps } from '../../components/maps/maps';
 import { SliderComponent } from '../../components/slider/slider.component';
 import { FavoriteEventsService } from '../../services/favorite-events.service';
 import { FavoritePlacesService } from '../../services/favorite-places.service';
+import { TabService } from '../../services/tab.service';
 
 @Component({
   selector: 'app-places',
@@ -57,11 +59,12 @@ export class Places implements OnInit {
     return municipio?.id ? allGrouped[municipio.id] || [] : [];
   });
 
-  constructor() {
+  constructor(public tabService: TabService) {
     console.log('Places component constructor called');
     console.log('User logged in:', this.apiService.isLoggedIn());
     console.log('Token exists:', !!localStorage.getItem('token'));
     console.log('toggleFavoriteEvent method exists:', typeof this.toggleFavoriteEvent);
+    console.log('toggleFavoritePlace method exists:', typeof this.toggleFavoritePlace);
     this.loadPlaces();
     this.loadFavorites();
 
@@ -81,7 +84,9 @@ export class Places implements OnInit {
   ngOnInit(): void {
     this.isMobile = window.innerWidth <= 768;
   }
-
+  cambiarTab(event: MatTabChangeEvent) {
+    this.tabService.currentTab.set(event.index);
+  }
   onMunicipioSeleccionado(): void {
     if (this.isMobile && this.infoDialog?.nativeElement) {
       setTimeout(() => {
@@ -137,19 +142,24 @@ export class Places implements OnInit {
 
   // ---------- FAVORITOS: PLACES ----------
 
-  toggleFavoritePlace(placeId: number) {
-    console.log('Places: toggleFavoriteEvent called with eventId:', placeId);
+  toggleFavoritePlace(placeId: number): void {
+    console.log('Places: toggleFavoritePlace called with placeId:', placeId);
     if (!this.apiService.isLoggedIn()) {
       console.log('User not logged in, cannot toggle favorite');
       return;
     }
-  
+    console.log('Toggle favorito para el lugar:', placeId);
+    if (this.favoritePlacesService.isFavoriteSignal(placeId)) {
+      this.favoritePlacesService.removeFavoritePlace(placeId).subscribe();
+    } else {
+      this.favoritePlacesService.addFavoritePlace(placeId).subscribe();
+    }
+    // Lógica para agregar/quitar de favoritos
   }
 
   // ---------- FAVORITOS: EVENTS ----------
 
   toggleFavoriteEvent(eventId: number) {
-    console.log('Places: toggleFavoriteEvent called with eventId:', eventId);
     if (!this.apiService.isLoggedIn()) {
       console.log('User not logged in, cannot toggle favorite');
       return;

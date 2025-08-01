@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-   private API_URL = 'http://localhost:3000/api/v1';
+  private API_URL = 'http://localhost:3000/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -17,68 +17,65 @@ export class ApiService {
   register(name: string, email: string, password: string): Observable<any> {
     return this.http.post(`${this.API_URL}/`, { name, email, password });
   }
-  //--- EVENTS ---
 
+  // --- EVENTS ---
   getEventsByMunicipio(municipio_id: number): Observable<any[]> {
-  return this.http.get<any[]>(`${this.API_URL}/municipios/${municipio_id}/events`);
-}
+    return this.http.get<any[]>(`${this.API_URL}/municipios/${municipio_id}/events`);
+  }
 
-// --- PLACES ---
+  getAllEvents(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/events`);
+  }
 
-getAllPlaces(): Observable<any[]> {
-  return this.http.get<any[]>(`${this.API_URL}/places`);
-}
+  // --- PLACES ---
+  getAllPlaces(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/places`);
+  }
 
   // --- FAVORITOS ---
+  // --- Lugares favoritos ---
+  getFavoritePlaces(): Observable<any[]> {
+    const headers = this.createAuthHeaders();
+    return this.http.get<any[]>(`${this.API_URL}/favorite-places`, { headers });
+  }
 
-  // Lugares favoritos
-getFavoritePlaces(): Observable<any[]> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
-  return this.http.get<any[]>(`${this.API_URL}/favorite-places`, { headers });
-}
+  addFavoritePlace(place_id: number): Observable<any> {
+    const headers = this.createAuthHeaders(true);
+    return this.http.post(`${this.API_URL}/favorite-places`, { place_id }, { headers });
+  }
 
-addFavoritePlace(place_id: number): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  });
-  return this.http.post(`${this.API_URL}/favorite-places`, { place_id }, { headers });
-}
+  removeFavoritePlace(place_id: number): Observable<any> {
+    const headers = this.createAuthHeaders();
+    return this.http.delete(`${this.API_URL}/favorite-places/${place_id}`, { headers });
+  }
 
-removeFavoritePlace(place_id: number): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
-  return this.http.delete(`${this.API_URL}/favorite-places/${place_id}`, { headers });
-}
- // Eventos favoritos
+  // --- Eventos favoritos ---
+  getFavoriteEvents(): Observable<any[]> {
+    const headers = this.createAuthHeaders();
+    return this.http.get<any[]>(`${this.API_URL}/favorite-events`, { headers });
+  }
 
+  addFavoriteEvent(event_id: number): Observable<any> {
+    const headers = this.createAuthHeaders(true);
+    return this.http.post(`${this.API_URL}/favorite-events`, { event_id }, { headers });
+  }
 
-addFavoriteEvent(event_id: number): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  });
-  return this.http.post(`${this.API_URL}/favorite-events`, { event_id }, { headers });
-}
+  removeFavoriteEvent(event_id: number): Observable<any> {
+    const headers = this.createAuthHeaders();
+    return this.http.delete(`${this.API_URL}/favorite-events/${event_id}`, { headers });
+  }
 
-removeFavoriteEvent(event_id: number): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
-  return this.http.delete(`${this.API_URL}/favorite-events/${event_id}`, { headers });
-}
-
-
-  // Puedes agregar más métodos como postFavorite, getPlaces, etc.
+  // --- UTILITARIOS ---
   isLoggedIn(): boolean {
-  return !!localStorage.getItem('token');
-}
+    return !!localStorage.getItem('token');
+  }
+
+  private createAuthHeaders(isJson = false): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
+    let headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    if (isJson) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+    return headers;
+  }
 }

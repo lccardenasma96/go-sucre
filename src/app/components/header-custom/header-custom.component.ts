@@ -49,13 +49,16 @@ export class HeaderCustomComponent implements OnInit, OnDestroy {
     this.authSub = this.auth.authStatus$.subscribe((isLoggedIn) => {
       this.userName = isLoggedIn ? this.getUserNameFromToken() : null;
     });
-
-    // Al iniciar, revisamos si ya hay token guardado
+  
     if (this.auth.isAuthenticated()) {
       this.userName = this.getUserNameFromToken();
+      const token = this.auth.getToken();
+      if (token) {
+        this.auth.startTokenExpirationWatcher(token);
+      }
     }
   }
-
+  
   ngOnDestroy(): void {
     this.authSub?.unsubscribe();
   }
@@ -84,6 +87,7 @@ export class HeaderCustomComponent implements OnInit, OnDestroy {
 
   logout() {
     this.auth.logout(); // elimina token y emite logout
+    window.location.reload();
   }
 
   @HostListener('window:scroll', [])

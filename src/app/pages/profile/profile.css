@@ -1,0 +1,232 @@
+.container-profile{
+    display: flex;
+    padding:  75px 37px 30px 37px;
+    background-color: #3d93a8;
+    width: 100%;
+    gap: 25px;
+
+}
+.menu-profile{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  height: calc(100dvh - 130px);
+}
+.container-inf-user{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 0;
+  border-bottom: solid 1px #777;
+}
+.image-profile-container{
+  color: #3d93a8;
+}
+.icon-user-profile{
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}
+.name-user-profile{
+  margin: 0;
+  width: 100%;
+  color: #777;
+}
+.tabs-menu-profile {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  margin-top: 25px;
+  gap: 10px;
+}
+  
+.menu-button-profile {
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #001A3D;
+}
+.menu-button-profile:hover {
+  color: #FFB700;
+}
+.menu-button-profile.active {
+  color: #FFB700;
+}
+.tabs-content {
+  padding: 20px;
+  flex: 1;
+}
+.tabs-content-profile{
+  background-color: white;
+  border-radius: 8px;
+  width: 70%;
+}
+.container-information-profile{
+  padding: 20px;
+}
+.title-information-profile{
+  color: #001A3D;
+}
+.container-card-profile{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+  overflow-y: hidden;
+}
+.flip-card {
+  background-color: transparent;
+  width: 220px;
+  height: 320px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 220px;
+  height: 320px;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* === FRONT === */
+.flip-card-front {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container {
+  width: 220px;
+  height: 192px;
+}
+
+.image-container img {
+  width: 220px;
+  height: 192px;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.card-front-content {
+  background: #ffffff;
+  width: 220px;
+  padding: 12px;
+  text-align: center;
+}
+
+.card-front-content h3 {
+  color: #001A3D;
+  margin: 10px 0px 0px;
+}
+
+.card-front-content .date {
+  font-size: 14px;
+  color: #777777;
+  margin: 0px;
+}
+
+.stars {
+  color: #FFB700;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/* === BACK === */
+.flip-card-back {
+  background-color: #166579;
+  color: #ffffff;
+  transform: rotateY(180deg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flip-card-back p {
+  font-size: 15px;
+  margin: 25px 15px;
+}
+
+/* === BOTONES FLOTANTES === */
+.floating-buttons {
+  width: 198px;
+  display: flex;
+  gap: 4px;
+  margin-top: auto;
+  padding-bottom: 10px;
+}
+
+.floating-buttons button {
+  background-color: #3d93a8;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 0px;
+}
+
+.floating-buttons button:hover {
+  background-color: #80bccb;
+}
+
+.card-button_favorite {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.card-button_event {
+  border-radius: 0px 10px 10px 0px;
+}
+@media (max-width: 768px) {
+  .flip-card {
+    width: 180px;
+    height: 280px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    width: 180px;
+    height: 280px;
+  }
+
+  .image-container,
+  .image-container img {
+    width: 180px;
+    height: 168px;
+  }
+
+  .card-front-content {
+    width: 180px;
+    padding: 10px;
+  }
+
+  .floating-buttons {
+    width: 160px;
+  }
+
+  .floating-buttons button {
+    font-size: 12px;
+  }
+}

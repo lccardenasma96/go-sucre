@@ -1,1 +1,135 @@
-<p>profile works!</p>
+<section class="container-profile">
+    <aside class="menu-profile">
+      <div class="container-inf-user">
+        <div class="image-profile-container">
+          <mat-icon class="icon-user-profile">account_circle</mat-icon>
+        </div>
+        <p class="name-user-profile">{{ userName }}</p>
+      </div>
+  
+      <div class="tabs-menu-profile">
+        <button
+          *ngFor="let tab of tabs; let i = index"
+          class="menu-button-profile"
+          [class.active]="selectedTab === i"
+          (click)="selectTab(i)">
+          {{ tab.label }}
+        </button>
+        <button class="menu-button-profile" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </aside>
+  
+    <!-- Contenido dinámico -->
+    <div class="tabs-content-profile">
+      <ng-container [ngSwitch]="selectedTab">
+  
+        <!-- TAB 0: Favoritos -->
+        <div class="container-information-profile" *ngSwitchCase="0">
+          <h2 class="title-information-profile">Favoritos</h2>
+  
+          <mat-tab-group animationDuration="0ms">
+            <!-- Eventos favoritos -->
+            <mat-tab label="Eventos">
+              <ng-container *ngIf="favoriteEventsData().length > 0; else noEvents">
+                <div class="container-card-profile">
+                    <div class="flip-card" *ngFor="let item of favoriteEventsData()">
+                        <div class="flip-card-inner">
+                          <!-- FRONT -->
+                          <div class="flip-card-front">
+                            <div class="image-container">
+                              <img class="card-image" [src]="item.image" alt="{{ item.name }}" />
+                            </div>
+                            <div class="card-front-content">
+                              <h3>{{ item.name }}</h3>
+                              <p class="date">{{ item.start_date | date: 'dd/MM/yyyy' }} - {{ item.end_date | date: 'dd/MM/yyyy' }}
+                            </p>
+                              <div class="stars">★ ★ ★ ★ ☆</div>
+                            </div>
+                          </div>
+        
+                          <!-- BACK -->
+                          <div class="flip-card-back">
+                            <p>{{ item.description }}</p>
+                            <div class="floating-buttons">
+                              <button class="card-button_favorite" (click)="onToggleFavorite(item.id)" type="button">
+                                <mat-icon class="card-button_icon">
+                                  {{ favoriteMap()[item.id] ? 'favorite' : 'favorite_border' }}
+                                </mat-icon>
+                              </button>
+                              <button>
+                                <mat-icon class="card-button_icon">location_on</mat-icon>
+                              </button>
+                              <button class="card-button_event">
+                                <mat-icon class="card-button_icon">event</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                
+              </ng-container>
+              <ng-template #noEvents>
+                <p>No tienes eventos favoritos aún.</p>
+              </ng-template>
+            </mat-tab>
+  
+            <!-- Lugares favoritos -->
+            <mat-tab label="Lugares">
+              <ng-container *ngIf="favoritePlacesData().length > 0; else noPlaces">
+                <div class="container-card-profile">
+                  <div class="flip-card" *ngFor="let place of favoritePlacesData()">
+                    <div class="flip-card-inner">
+                      <!-- FRONT -->
+                      <div class="flip-card-front">
+                        <div class="image-container">
+                          <img class="card-image" [src]="place.image" alt="{{ place.name }}" />
+                        </div>
+                        <div class="card-front-content">
+                          <h3>{{ place.name }}</h3>
+                          <p class="location">{{ place.municipio_name }}</p>
+                        </div>
+                      </div>
+    
+                      <!-- BACK -->
+                      <div class="flip-card-back">
+                        <p>{{ place.description }}</p>
+                        <div class="floating-buttons">
+                          <button class="card-button_favorite" (click)="toggleFavoritePlace(place.id)" type="button">
+                            <mat-icon class="card-button_icon">
+                              {{ favoritePlacesService.isFavoriteSignal(place.id) ? 'favorite' : 'favorite_border' }}
+                            </mat-icon>
+                          </button>
+                          <button>
+                            <mat-icon class="card-button_icon">location_on</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </ng-container>
+              <ng-template #noPlaces>
+                <p>No tienes lugares favoritos aún.</p>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+  
+        <!-- TAB 1: Sitios visitados -->
+        <div class="container-information-profile" *ngSwitchCase="1">
+          <h2 class="title-information-profile">Sitios visitados</h2>
+          <p>Contenido de sitios visitados del usuario.</p>
+        </div>
+  
+        <!-- TAB 2: Calendario -->
+        <div class="container-information-profile" *ngSwitchCase="2">
+          <h2 class="title-information-profile">Calendario</h2>
+          <p>Contenido de configuración.</p>
+        </div>
+  
+      </ng-container>
+    </div>
+  </section>
+  

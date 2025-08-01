@@ -17,7 +17,6 @@
 <mat-menu  #beforeMenu="matMenu" xPosition="before">
   <div class="container_options_loggedin">
     <a class="option_menu_loggedin" routerLink="/profile">Perfil</a>  
-    <a class="option_menu_loggedin" href="/">Calendario</a>
     <button class="option_menu_loggedin button_menu_loggedin" (click)="logout()">Cerrar sesión</button>
   </div>
   
@@ -41,8 +40,7 @@
            <p  class="menu_option_mobile loggedin_name_user_mobile"> {{ userName }} </p>
         </summary>
         <div class="container-options-mobile_user">
-            <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="">Favoritos</a>
-            <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="">Calendario</a>
+            <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="/profile">Mi cuenta</a>
         </div>            
         </details>
         <a *ngIf="!api.isLoggedIn()" class="menu_option_mobile" (click)="openDialogAuth(); toggleMenu()">Ingresa</a>
