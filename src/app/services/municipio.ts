@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class MunicipioService {
   selectedMunicipio = signal<any | null>(null);
 
-  private apiUrl = 'http://localhost:3000/api/v1/municipios';
+  private apiUrl = 'https://api-prueba-oe7m.onrender.com/api/v1/municipios';
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class FavoritePlacesService {
-  private apiUrl = `http://localhost:3000/api/v1/favorite-places`;
+  private apiUrl = `https://api-prueba-oe7m.onrender.com/api/v1/favorite-places`;
   constructor(private http: HttpClient) {}
 
   private favoriteMap = signal<Record<number, boolean>>({});
@@ -88,7 +88,7 @@ export class FavoritePlacesService {
 
   isFavorite(placeId: number): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any>(`http://localhost:3000/api/v1/favorite-places/${placeId}`, { headers });
+    return this.http.get<any>(`https://api-prueba-oe7m.onrender.com/api/v1/favorite-places/${placeId}`, { headers });
   }
 
   getAllFavorites(): Observable<any[]> {

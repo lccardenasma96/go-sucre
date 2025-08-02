@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private API_URL = 'http://localhost:3000/api/v1';
+  private API_URL = 'https://api-prueba-oe7m.onrender.com/api/v1';
 
   constructor(private http: HttpClient) {}
 
