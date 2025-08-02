@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ApiService } from '../../services/api.service';
@@ -40,11 +40,18 @@ export class DialogAuthComponent {
   registerSuccess = '';
   registerError = '';
 
+  // Expiration message
+  showExpirationMessage = false;
+
   constructor(
     private api: ApiService,
     private auth: AuthService,
-    private dialogRef: MatDialogRef<DialogAuthComponent>
-  ) {}
+    private dialogRef: MatDialogRef<DialogAuthComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    // Verificar si se debe mostrar el mensaje de expiración
+    this.showExpirationMessage = data?.showExpirationMessage || false;
+  }
 
   login() {
     this.api.login(this.email, this.password).subscribe({

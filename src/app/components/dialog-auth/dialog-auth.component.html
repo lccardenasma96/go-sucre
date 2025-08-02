@@ -24,6 +24,8 @@
         </div>
         <p *ngIf="registerSuccess" class="success_message">{{ registerSuccess }}</p>
         <p *ngIf="registerError" class="error-msg">{{ registerError }}</p>
+           
+          <p *ngIf="showExpirationMessage" class="error-msg">Tu sesión ha expirado. Por favor, inicia sesión nuevamente para continuar.</p>
         <button type="submit" class="auth_button_form" >Registrar</button>
       </form>
     </div>

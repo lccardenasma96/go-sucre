@@ -128,6 +128,7 @@ visibility: hidden;
   font-size: 13px;
   margin: 8px 0;
   text-align: left;
+  line-height: 20px;
 }
 .checked_bg{
   position: absolute;

@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAuthComponent } from '../components/dialog-auth/dialog-auth.component';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private tokenKey = 'token';
   private loggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
+  private dialog = inject(MatDialog);
 
   authStatus$ = this.loggedIn.asObservable();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   private isTokenValid(): boolean {
     const token = this.getToken();
@@ -43,6 +47,22 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
+  // Método para logout con apertura del dialog de autenticación
+  logoutWithExpirationDialog(): void {
+    this.logout();
+    this.openAuthDialogWithExpirationMessage();
+    this.router.navigate(['/']);
+
+  }
+
+  // Método para abrir el dialog con mensaje de expiración
+  private openAuthDialogWithExpirationMessage(): void {
+    const dialogRef = this.dialog.open(DialogAuthComponent, { 
+      restoreFocus: false,
+      data: { showExpirationMessage: true }
+    });
+  }
+
   // 🕒 Detecta cuándo expira el token y desloguea automáticamente
   startTokenExpirationWatcher(token: string): void {
     try {
@@ -53,13 +73,13 @@ export class AuthService {
 
       if (timeout > 0) {
         setTimeout(() => {
-          this.logout();
+          this.logoutWithExpirationDialog();
         }, timeout);
       } else {
-        this.logout();
+        this.logoutWithExpirationDialog();
       }
     } catch (e) {
-      this.logout();
+      this.logoutWithExpirationDialog();
     }
   }
 }
