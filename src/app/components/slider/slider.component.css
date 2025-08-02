@@ -116,6 +116,20 @@
 .flip-card-back p {
   font-size: 15px;
   margin: 25px 15px;
+  overflow-y: scroll;
+}
+.flip-card-back p::-webkit-scrollbar{
+  width: 5px;
+}
+.flip-card-back p::-webkit-scrollbar-thumb {
+  background-color: #ffffff55; /* color semitransparente */
+  border-radius: 10px;
+}
+.flip-card-back p::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff88;
+}
+.flip-card-back p::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /* === BOTONES FLOTANTES === */
