@@ -14,7 +14,7 @@
        
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist",
+           "outputPath": "dist/go-sucre",
             "baseHref": "/gosucre/",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
