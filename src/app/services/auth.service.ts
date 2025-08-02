@@ -67,7 +67,7 @@ export class AuthService {
   startTokenExpirationWatcher(token: string): void {
     try {
       const decoded: any = jwtDecode(token);
-      const expirationTime = decoded.exp * 1000; // en ms
+      const expirationTime = decoded.exp * 1000;
       const now = Date.now();
       const timeout = expirationTime - now;
 

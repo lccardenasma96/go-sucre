@@ -67,7 +67,7 @@
 
 .image-container {
   width: 220px;
-  height: 192px; /* 60% of 320px */
+  height: 192px; 
 }
 
 .image-container img {
@@ -122,7 +122,7 @@
   width: 5px;
 }
 .flip-card-back p::-webkit-scrollbar-thumb {
-  background-color: #ffffff55; /* color semitransparente */
+  background-color: #ffffff55;
   border-radius: 10px;
 }
 .flip-card-back p::-webkit-scrollbar-thumb:hover {

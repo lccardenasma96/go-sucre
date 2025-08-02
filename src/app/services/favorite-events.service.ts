@@ -1,4 +1,3 @@
-// src/app/services/favorite-events.service.ts
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
@@ -26,7 +25,6 @@ export class FavoriteEventsService {
       },
       error: (error) => {
         console.warn(`Warning: Could not fetch favorite status for event ${eventId}:`, error.status || 'Unknown error');
-        // Silently set as not favorite without showing error in console
         this.favoriteMap.update(map => ({ ...map, [eventId]: false }));
       }
     });

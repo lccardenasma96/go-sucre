@@ -3,55 +3,47 @@
     <div class="logo"></div>
   </a> 
   <nav class="menu menu-desktop">  
-  <a class="menu_option" routerLink="/about">Acerca</a>
-  <a class="menu_option" routerLink="/places">Lugares</a>
-</nav>
+    <a class="menu_option" routerLink="/about">Acerca</a>
+    <a class="menu_option" routerLink="/places">Lugares</a>
+  </nav>
   <button *ngIf="!api.isLoggedIn()" class="menu_option menu-desktop option-user" mat-button (click)="openDialogAuth()">
     <mat-icon class="icon-user">account_circle</mat-icon>    
   </button>
 
   <div class="menu_option menu-desktop container-loggedin-user" *ngIf="api.isLoggedIn()">
-      <p  class="menu_option loggedin_name_user"> {{ userName }} </p>
-  <button class="menu_option menu-desktop option-user option-user_loggedin" matButton [matMenuTriggerFor]="beforeMenu">
-    <mat-icon class="icon-user">account_circle</mat-icon>  
-  </button>
-<mat-menu  #beforeMenu="matMenu" xPosition="before">
-  <div class="container_options_loggedin">
-    <a class="option_menu_loggedin" routerLink="/profile">Perfil</a>  
-    <button class="option_menu_loggedin button_menu_loggedin" (click)="logout()">Cerrar sesión</button>
+    <p  class="menu_option loggedin_name_user"> {{ userName }} </p>
+    <button class="menu_option menu-desktop option-user option-user_loggedin" matButton [matMenuTriggerFor]="beforeMenu">
+      <mat-icon class="icon-user">account_circle</mat-icon>  
+    </button>
+    <mat-menu  #beforeMenu="matMenu" xPosition="before">
+    <div class="container_options_loggedin">
+      <a class="option_menu_loggedin" routerLink="/profile">Perfil</a>  
+      <button class="option_menu_loggedin button_menu_loggedin" (click)="logout()">Cerrar sesión</button>
+    </div>  
+    </mat-menu>
   </div>
-  
-</mat-menu>
-  </div>
-
-
-<button class="toggle-menu_mobile" (click)="toggleMenu()">
-    <mat-icon class="icon-toggle">menu</mat-icon> 
-</button>
- 
-    <nav class="menu-options_mobile" id="menu-options_mobile" >  
-        
-        <div class="container-menu_mobile">   
-          <button class="close-button" (click)="toggleMenu()">
-            <mat-icon class="icon-toggle_close">close</mat-icon> 
-          </button>
+  <button class="toggle-menu_mobile" (click)="toggleMenu()">
+      <mat-icon class="icon-toggle">menu</mat-icon> 
+  </button> 
+  <nav class="menu-options_mobile" id="menu-options_mobile" >        
+      <div class="container-menu_mobile">   
+        <button class="close-button" (click)="toggleMenu()">
+          <mat-icon class="icon-toggle_close">close</mat-icon> 
+        </button>
         <details *ngIf="api.isLoggedIn()">
-        <summary class="menu_option_mobile option-mobile-user" >
-          <mat-icon class="icon-user">account_circle</mat-icon>
-           <p  class="menu_option_mobile loggedin_name_user_mobile"> {{ userName }} </p>
-        </summary>
-        <div class="container-options-mobile_user">
+          <summary class="menu_option_mobile option-mobile-user" >
+            <mat-icon class="icon-user">account_circle</mat-icon>
+            <p  class="menu_option_mobile loggedin_name_user_mobile"> {{ userName }} </p>
+          </summary>
+          <div class="container-options-mobile_user">
             <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="/profile">Mi cuenta</a>
-        </div>            
+          </div>            
         </details>
         <a *ngIf="!api.isLoggedIn()" class="menu_option_mobile" (click)="openDialogAuth(); toggleMenu()">Ingresa</a>
         <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="">Inicio</a>
         <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="/about">Acerca</a>
         <a class="menu_option_mobile" (click)="toggleMenu()" routerLink="/places">Lugares</a>  
         <button *ngIf="api.isLoggedIn()" class="button_menu_loggedin" (click)="logout()">Cerrar sesión</button>
-
-        </div>
-    </nav>
-  
-
+      </div>
+  </nav>
 </header>

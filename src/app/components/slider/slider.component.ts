@@ -78,7 +78,7 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
       : this.favoritePlacesService.favoriteMapComputed()
   );
 
-  /**
+  /*
    * Crea un map específico para los eventos del array
    */
   readonly eventsFavoriteMap = computed(() => {
@@ -114,7 +114,6 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
         next: (favorites) => {
           console.log('✅ Favoritos de eventos cargados:', favorites);
           console.log('📋 IDs de favoritos:', favorites.map(f => f.id));
-          // Los favoritos se actualizan automáticamente en el servicio
         },
         error: (error) => {
           console.warn('⚠️ Error cargando favoritos de eventos:', error.status || 'Unknown error');
@@ -127,7 +126,6 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
         next: (favorites) => {
           console.log('✅ Favoritos de lugares cargados:', favorites);
           console.log('📋 IDs de favoritos:', favorites.map(f => f.id));
-          // Los favoritos se actualizan automáticamente en el servicio
         },
         error: (error) => {
           console.warn('⚠️ Error cargando favoritos de lugares:', error.status || 'Unknown error');
@@ -142,9 +140,6 @@ export class SliderComponent implements OnInit, AfterViewInit, OnChanges {
   public refreshFavorites(): void {
     console.log('Slider: Refrescando favoritos...');
     this.loadAllFavorites();
-
-    // No necesitamos hacer llamadas individuales ya que loadAllFavorites
-    // actualiza el mapa completo de favoritos
   }
 
   /**

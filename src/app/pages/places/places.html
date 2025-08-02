@@ -17,14 +17,9 @@
             (toggleFavoriteEvent)="toggleFavoriteEvent($event)" title="Eventos"></app-slider>
           </mat-tab>
           <mat-tab label="Lugares">
-            <app-slider
-  [items]="lugares()"
-  [favorites]="favoritePlaces()"
-  [isEvent]="false"
-  (toggleFavoritePlace)="toggleFavoritePlace($event)"
-></app-slider>
-
-            </mat-tab>
+            <app-slider [items]="lugares()" [favorites]="favoritePlaces()" [isEvent]="false" 
+            (toggleFavoritePlace)="toggleFavoritePlace($event)"></app-slider>
+          </mat-tab>
         </mat-tab-group>
       </ng-container>
 
@@ -50,9 +45,7 @@
             (toggleFavoriteEvent)="toggleFavoriteEvent($event)" title="Eventos"></app-slider>
           </mat-tab>
           <mat-tab label="Lugares">
-            <app-slider [items]="lugares()"
-            [favorites]="favoritePlaces()"
-            [isEvent]="false"
+            <app-slider [items]="lugares()" [favorites]="favoritePlaces()" [isEvent]="false"
             (toggleFavoritePlace)="toggleFavoritePlace($event)"></app-slider>
           </mat-tab>
         </mat-tab-group>

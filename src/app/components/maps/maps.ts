@@ -7,7 +7,6 @@ import {
   EventEmitter
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { MUNICIPIOS } from './municipios';
 import { MunicipioService } from '../../services/municipio';
 
 @Component({
@@ -84,7 +83,7 @@ export class Maps implements AfterViewInit {
         this.zone.run(() => {
           this.municipioService.setSelectedMunicipio(municipio);
 
-          // ✅ Solo emite el evento si el ancho es 768px o menor (mobile)
+          // Solo emite el evento si el ancho es 768px o menor (mobile)
           if (window.innerWidth <= 768) {
             this.municipioSeleccionado.emit();
           }

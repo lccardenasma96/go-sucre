@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        // Si el error es 401 (Unauthorized), significa que el token expiró
         if (error.status === 401) {
           this.authService.logoutWithExpirationDialog();
         }

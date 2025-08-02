@@ -64,12 +64,12 @@ export class Profile implements OnInit {
     });
   }
 
-  // ✅ Mapea favoritos por ID usando el servicio
+  // Mapea favoritos por ID usando el servicio
   favoriteMap = computed(() => {
     return this.favoriteEventsService.favoriteMapComputed();
   });
 
-  // ✅ Método usado en HTML
+  //  Método usado en HTML
   onToggleFavorite(eventId: number): void {
     if (!this.auth.isAuthenticated()) return;
 
@@ -132,7 +132,6 @@ export class Profile implements OnInit {
     this.favoritePlacesData.update(places => places.filter(p => p.id !== id));
   }
 
-  // Extra
   selectTab(index: number) {
     this.selectedTab = index;
   }

@@ -1,4 +1,3 @@
-// src/app/services/favorite-places.service.ts
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
@@ -26,7 +25,6 @@ export class FavoritePlacesService {
       },
       error: (error) => {
         console.warn(`Warning: Could not fetch favorite status for place ${placeId}:`, error.status || 'Unknown error');
-        // Silently set as not favorite without showing error in console
         this.favoriteMap.update(map => ({ ...map, [placeId]: false }));
       }
     });
